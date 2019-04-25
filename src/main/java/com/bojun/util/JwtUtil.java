@@ -16,7 +16,7 @@ public class JwtUtil {
     // 盐值
     private static final String TOKEN_SECRET = "75e3a053-4242-40c2-923a-1c5625ca43fd";
 
-    public static String Sign(String username, Integer id) {
+    public static String sign(String username, Integer id) {
         try {
             Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
