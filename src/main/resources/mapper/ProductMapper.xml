@@ -36,7 +36,7 @@
       detail, create_time, update_time, 
       parameter, pictures)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
-      #{detail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{detail,jdbcType=VARCHAR}, now(), now(),
       #{parameter,jdbcType=LONGVARCHAR}, #{pictures,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bojun.data.entity.ProductWithBLOBs" >
@@ -81,10 +81,10 @@
         #{detail,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="parameter != null" >
         #{parameter,jdbcType=LONGVARCHAR},
@@ -127,7 +127,7 @@
       category_id = #{categoryId,jdbcType=INTEGER},
       detail = #{detail,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_time = now(),
       parameter = #{parameter,jdbcType=LONGVARCHAR},
       pictures = #{pictures,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
@@ -138,7 +138,7 @@
       category_id = #{categoryId,jdbcType=INTEGER},
       detail = #{detail,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

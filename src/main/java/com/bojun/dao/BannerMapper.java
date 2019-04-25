@@ -1,7 +1,9 @@
 package com.bojun.dao;
 
 import com.bojun.data.entity.Banner;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface BannerMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -2,7 +2,9 @@ package com.bojun.dao;
 
 import com.bojun.data.entity.Product;
 import com.bojun.data.entity.ProductWithBLOBs;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer id);
 

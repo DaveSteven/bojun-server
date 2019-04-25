@@ -1,7 +1,9 @@
 package com.bojun.dao;
 
 import com.bojun.data.entity.Category;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface CategoryMapper {
     int deleteByPrimaryKey(Integer id);
 
