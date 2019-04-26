@@ -55,7 +55,7 @@ public class AdministratorImpl implements IAdministratorService {
         Integer userId = UserHolder.get();
         Administrator admin = administratorMapper.selectByPrimaryKey(userId);
         if (null == admin) {
-            return ServerResponse.createByErrorMessage("用户信息获取失败");
+            return ServerResponse.createByErrorMessage("token无效");
         }
         admin.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess(admin);

@@ -1,6 +1,6 @@
 package com.bojun.interceptor;
 
-import com.bojun.annotation.LoginRequired;
+import com.bojun.common.Const;
 import com.bojun.exception.MyException;
 import com.bojun.util.JwtUtil;
 import org.springframework.stereotype.Component;
@@ -18,12 +18,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
-        String token = request.getHeader("accessToken");
+
+        String token = request.getHeader(Const.ACCESS_TOKEN);
         if (null != token) {
             boolean result = JwtUtil.verify(token);
             if (!result) {
                 throw new MyException();
             }
+        } else {
+            throw new MyException();
         }
         return true;
     }

@@ -4,7 +4,6 @@ import com.bojun.common.ServerResponse;
 import com.bojun.data.entity.Administrator;
 import com.bojun.service.IAdministratorService;
 import com.bojun.util.JwtUtil;
-import org.apache.catalina.Server;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +19,12 @@ public class AdminController {
     @Resource
     private IAdministratorService iAdminService;
 
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     */
     @PostMapping("/login")
     public ServerResponse login(String username, String password) {
         ServerResponse<Administrator> response = iAdminService.login(username, password);
@@ -35,12 +40,21 @@ public class AdminController {
         return response;
     }
 
+    /**
+     * 添加用户
+     * @param admin
+     * @return
+     */
     @PostMapping("/add")
     public ServerResponse addAdmin(Administrator admin) {
         return iAdminService.addAdmin(admin);
     }
 
-    @PostMapping("/getUserInfo")
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @PostMapping("/getInfo")
     public ServerResponse getUserInfo() {
         return iAdminService.getUserInfo();
     }
