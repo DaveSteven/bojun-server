@@ -3,6 +3,7 @@ package com.bojun.service.impl;
 import com.bojun.common.ServerResponse;
 import com.bojun.dao.AdministratorMapper;
 import com.bojun.data.entity.Administrator;
+import com.bojun.holder.UserHolder;
 import com.bojun.service.IAdministratorService;
 import com.bojun.util.MD5Util;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,15 @@ public class AdministratorImpl implements IAdministratorService {
         return ServerResponse.createBySuccess("登录成功", admin);
     }
 
-//    public ServerResponse<Administrator> getUserInfo()
+    public ServerResponse<Administrator> getUserInfo() {
+        Integer userId = UserHolder.get();
+        Administrator admin = administratorMapper.selectByPrimaryKey(userId);
+        if (null == admin) {
+            return ServerResponse.createByErrorMessage("用户信息获取失败");
+        }
+        admin.setPassword(StringUtils.EMPTY);
+        return ServerResponse.createBySuccess(admin);
+    }
 
     private ServerResponse<String> isExistAdmin(String username) {
         int resultCount = administratorMapper.isExistAdmin(username);

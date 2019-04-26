@@ -28,8 +28,8 @@ public class AdminController {
             String token = JwtUtil.sign(username, admin.getId());
             if (null != token) {
                 Map<String, Object> map = new HashMap<>(2);
-                map.put("data", token);
-                return ServerResponse.createBySuccess("登录成功", token);
+                map.put("token", token);
+                return ServerResponse.createBySuccess("登录成功", map);
             }
         }
         return response;
@@ -38,5 +38,10 @@ public class AdminController {
     @PostMapping("/add")
     public ServerResponse addAdmin(Administrator admin) {
         return iAdminService.addAdmin(admin);
+    }
+
+    @PostMapping("/getUserInfo")
+    public ServerResponse getUserInfo() {
+        return iAdminService.getUserInfo();
     }
 }
