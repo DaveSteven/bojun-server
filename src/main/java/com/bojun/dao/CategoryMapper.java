@@ -3,8 +3,12 @@ package com.bojun.dao;
 import com.bojun.data.entity.Category;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface CategoryMapper {
+    List<Category> selectAll();
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Category record);
