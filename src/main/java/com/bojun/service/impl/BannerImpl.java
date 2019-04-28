@@ -25,6 +25,22 @@ public class BannerImpl implements IBannerService {
         return ServerResponse.createByError();
     }
 
+    public ServerResponse<String> deleteBanner(Integer id) {
+        int resultCount = bannerMapper.deleteByPrimaryKey(id);
+        if (resultCount > 0) {
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
+    }
+
+    public ServerResponse<String> editBanner(Banner banner) {
+        int resultCount = bannerMapper.updateByPrimaryKeySelective(banner);
+        if (resultCount > 0) {
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
+    }
+
     public ServerResponse getBannerList(Integer start, Integer limit) {
         PageHelper.startPage(start, limit);
         Page<Banner> bannerList = bannerMapper.selectAll();

@@ -17,19 +17,26 @@ public class BannerController {
     @Resource
     private IBannerService iBannerService;
 
+    /**
+     * 添加
+     * @param banner banner实体
+     * @return ServerResponse
+     */
     @PostMapping("/add")
     public ServerResponse<String> addBanner(Banner banner) {
        return iBannerService.addBanner(banner);
     }
 
+
+
     /**
      * 获取banner列表
-     * @param start
-     * @param limit
-     * @return
+     * @param start 页码
+     * @param limit 显示条数
+     * @return ServerResponse
      */
-    @PostMapping("/list")
-    public ServerResponse getBannerList(@RequestParam(value = "start", defaultValue = "0") Integer start, @RequestParam(value = "limit", defaultValue = "9") Integer limit) {
+    @PostMapping("/getList")
+    public ServerResponse getBannerList(@RequestParam(value = "start", defaultValue = "0") Integer start, @RequestParam(value = "limit", defaultValue = "10") Integer limit) {
         return iBannerService.getBannerList(start, limit);
     }
 }
