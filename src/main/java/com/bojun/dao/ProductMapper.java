@@ -1,22 +1,24 @@
 package com.bojun.dao;
 
 import com.bojun.data.entity.Product;
-import com.bojun.data.entity.ProductWithBLOBs;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ProductMapper {
+    Page<Product> selectAll();
+
     int deleteByPrimaryKey(Integer id);
 
-    int insert(ProductWithBLOBs record);
+    int insert(Product record);
 
-    int insertSelective(ProductWithBLOBs record);
+    int insertSelective(Product record);
 
-    ProductWithBLOBs selectByPrimaryKey(Integer id);
+    Product selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(ProductWithBLOBs record);
+    int updateByPrimaryKeySelective(Product record);
 
-    int updateByPrimaryKeyWithBLOBs(ProductWithBLOBs record);
+    int updateByPrimaryKeyWithBLOBs(Product record);
 
     int updateByPrimaryKey(Product record);
 }

@@ -27,7 +27,25 @@ public class BannerController {
        return iBannerService.addBanner(banner);
     }
 
+    /**
+     * 删除
+     * @param id banner id
+     * @return ServerResponse
+     */
+    @PostMapping("/delete")
+    public ServerResponse<String> deleteBanner(Integer id) {
+        return iBannerService.deleteBanner(id);
+    }
 
+    /**
+     * 修改banner
+     * @param banner banner实体
+     * @return ServerResponse
+     */
+    @PostMapping("/modify")
+    public ServerResponse<String> modifyBanner(Banner banner) {
+        return iBannerService.modifyBanner(banner);
+    }
 
     /**
      * 获取banner列表

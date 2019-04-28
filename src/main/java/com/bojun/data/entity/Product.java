@@ -21,4 +21,8 @@ public class Product {
     private Date createTime;
 
     private Date updateTime;
+
+    private String parameter;
+
+    private String pictures;
 }

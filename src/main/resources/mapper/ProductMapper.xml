@@ -8,22 +8,20 @@
     <result column="detail" property="detail" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.bojun.data.entity.ProductWithBLOBs" extends="BaseResultMap" >
-    <result column="parameter" property="parameter" jdbcType="LONGVARCHAR" />
-    <result column="pictures" property="pictures" jdbcType="LONGVARCHAR" />
+    <result column="parameter" property="parameter" jdbcType="VARCHAR" />
+    <result column="pictures" property="pictures" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, category_id, detail, create_time, update_time
+    id, name, category_id, detail, create_time, update_time, parameter, pictures
   </sql>
-  <sql id="Blob_Column_List" >
-    parameter, pictures
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from product
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from product
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -31,15 +29,15 @@
     delete from product
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bojun.data.entity.ProductWithBLOBs" >
+  <insert id="insert" parameterType="com.bojun.data.entity.Product" >
     insert into product (id, name, category_id, 
       detail, create_time, update_time, 
       parameter, pictures)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, 
       #{detail,jdbcType=VARCHAR}, now(), now(),
-      #{parameter,jdbcType=LONGVARCHAR}, #{pictures,jdbcType=LONGVARCHAR})
+      #{parameter,jdbcType=VARCHAR}, #{pictures,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.bojun.data.entity.ProductWithBLOBs" >
+  <insert id="insertSelective" parameterType="com.bojun.data.entity.Product" >
     insert into product
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -87,14 +85,14 @@
         now(),
       </if>
       <if test="parameter != null" >
-        #{parameter,jdbcType=LONGVARCHAR},
+        #{parameter,jdbcType=VARCHAR},
       </if>
       <if test="pictures != null" >
-        #{pictures,jdbcType=LONGVARCHAR},
+        #{pictures,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bojun.data.entity.ProductWithBLOBs" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.bojun.data.entity.Product" >
     update product
     <set >
       <if test="name != null" >
@@ -113,23 +111,23 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="parameter != null" >
-        parameter = #{parameter,jdbcType=LONGVARCHAR},
+        parameter = #{parameter,jdbcType=VARCHAR},
       </if>
       <if test="pictures != null" >
-        pictures = #{pictures,jdbcType=LONGVARCHAR},
+        pictures = #{pictures,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bojun.data.entity.ProductWithBLOBs" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bojun.data.entity.Product" >
     update product
     set name = #{name,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},
       detail = #{detail,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = now(),
-      parameter = #{parameter,jdbcType=LONGVARCHAR},
-      pictures = #{pictures,jdbcType=LONGVARCHAR}
+      parameter = #{parameter,jdbcType=VARCHAR},
+      pictures = #{pictures,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bojun.data.entity.Product" >
